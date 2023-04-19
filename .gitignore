@@ -5,6 +5,7 @@
 
 # Project files
 !/.gitignore
+!/Readme.md
 !/CMakeLists.txt
 !/CMakePresets.json
 !/.clang-format
