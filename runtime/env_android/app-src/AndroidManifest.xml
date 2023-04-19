@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+            android:label="ImGuiExample"
+            android:allowBackup="false"
+            android:fullBackupContent="false"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher"
+            android:hasCode="true"
+    >
+
+        <activity
+                android:name="imgui.example.android.MainActivity"
+                android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                android:exported="true"
+        >
+            <meta-data android:name="android.app.lib_name"
+                       android:value="my_app"
+            />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

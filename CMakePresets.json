@@ -1,0 +1,228 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/out/${presetName}",
+            "installDir": "${sourceDir}/out/install/${presetName}"
+        },
+
+        {
+            "name": "debug-build",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release-build",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+
+        {
+            "name": "windows-base",
+            "hidden": true,
+            "inherits": "base",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "PLATFORM_DESKTOP": true,
+                "PLATFORM_WINDOWS": true,
+                "PLATFORM_ARCHITECTURE": "x64"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "win-VisualStudio-MSVC-x64",
+            "hidden": true,
+            "inherits": "windows-base",
+            "generator": "Visual Studio 17 2022",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl"
+            }
+        },
+        {
+            "name": "win-Ninja-Clang-x64",
+            "hidden": true,
+            "inherits": "windows-base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            }
+        },
+        {
+            "name": "win-Ninja-GNU-x64",
+            "hidden": true,
+            "inherits": "windows-base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "Windows x64 - Visual Studio 17 - MSVC @ Release",
+            "inherits": [
+                "win-VisualStudio-MSVC-x64",
+                "release-build"
+            ]
+        },
+        {
+            "name": "Windows x64 - Visual Studio 17 - MSVC @ Debug",
+            "inherits": [
+                "win-VisualStudio-MSVC-x64",
+                "debug-build"
+            ]
+        },
+        {
+            "name": "Windows x64 - Ninja - Clang @ Release",
+            "inherits": [
+                "win-Ninja-Clang-x64",
+                "release-build"
+            ]
+        },
+        {
+            "name": "Windows x64 - Ninja - Clang @ Debug",
+            "inherits": [
+                "win-Ninja-Clang-x64",
+                "debug-build"
+            ]
+        },
+        {
+            "name": "Windows x64 - Ninja - GNU @ Release",
+            "inherits": [
+                "win-Ninja-GNU-x64",
+                "release-build"
+            ]
+        },
+        {
+            "name": "Windows x64 - Ninja - GNU @ Debug",
+            "inherits": [
+                "win-Ninja-GNU-x64",
+                "debug-build"
+            ]
+        },
+
+        {
+            "name": "linux-base",
+            "hidden": true,
+            "inherits": "base",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "PLATFORM_DESKTOP": true,
+                "PLATFORM_LINUX": true,
+                "PLATFORM_ARCHITECTURE": "x64"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        },
+        {
+            "name": "linux-Ninja-Clang-x64",
+            "hidden": true,
+            "inherits": "linux-base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            }
+        },
+        {
+            "name": "linux-Ninja-GNU-x64",
+            "hidden": true,
+            "inherits": "linux-base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc-12",
+                "CMAKE_CXX_COMPILER": "g++-12"
+            }
+        },
+        {
+            "name": "Linux x64 - Ninja - Clang @ Release",
+            "inherits": [
+                "linux-Ninja-Clang-x64",
+                "release-build"
+            ]
+        },
+        {
+            "name": "Linux x64 - Ninja - Clang @ Debug",
+            "inherits": [
+                "linux-Ninja-Clang-x64",
+                "debug-build"
+            ]
+        },
+        {
+            "name": "Linux x64 - Ninja - GNU @ Release",
+            "inherits": [
+                "linux-Ninja-GNU-x64",
+                "release-build"
+            ]
+        },
+        {
+            "name": "Linux x64 - Ninja - GNU @ Debug",
+            "inherits": [
+                "linux-Ninja-GNU-x64",
+                "debug-build"
+            ]
+        },
+
+        {
+            "name": "android-base",
+            "hidden": true,
+            "inherits": "base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "PLATFORM_MOBILE": true,
+                "PLATFORM_ANDROID": true,
+
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "ANDROID_TOOLCHAIN":"clang",
+                "ANDROID_STL":"c++_static"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "$env{APP_BASE_NAME}",
+                "rhs": "gradlew"
+            }
+        },
+        {
+            "name": "Android_All_Variants-Ninja-Clang_@_Debug",
+            "inherits": ["android-base", "debug-build"]
+        },
+        {
+            "name": "Android_All_Variants-Ninja-Clang_@_Release",
+            "inherits": ["android-base", "release-build"]
+        }
+    ]
+}

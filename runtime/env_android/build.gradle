@@ -1,0 +1,31 @@
+buildscript {
+    ext.kotlin_version = '1.7.20'
+    ext.cmake_min_version = '3.21.0+'
+    ext.project_root_dir = project.projectDir.getAbsolutePath() + "../../"
+    ext.setu_directory = "C:/DevDepo/GameEngine/"
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+def output_dir  = "$project_root_dir" + "../out/android"
+buildDir = new File(output_dir + "/root-build")
+subprojects {
+    buildDir = new File(output_dir + project.path.replaceFirst(":", "/").replace(":", "."))
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,31 @@
+**/*.*
+/out
+/*/env_android/*.*
+/**/~vendor/**/Makefile
+
+# Project files
+!/.gitignore
+!/CMakeLists.txt
+!/CMakePresets.json
+!/.clang-format
+
+# folders
+!/~scripts/*.ps1
+!/readme-assets/*.png
+
+# Source
+!/runtime/CMake*[.txt, .json]
+!/runtime/**/*[.cppm, .ixx, .cpp, .cxx, .hpp, .hxx, .c, .h]
+!/runtime/assets/icons/icon.png
+
+# environment: android
+!/runtime/env_android/app-src/src/main/res/mipmap-*/ic*.png
+!/runtime/env_android/app-src/AndroidManifest.xml
+!/runtime/env_android/app-src/build.gradle
+!/runtime/env_android/app-src/java/*.kt
+!/runtime/env_android/build.gradle
+!/runtime/env_android/settings.gradle
+!/runtime/env_android/gradlew
+!/runtime/env_android/gradlew.bat
+!/runtime/env_android/gradle/wrapper/gradle-wrapper.jar
+!/runtime/env_android/gradle/wrapper/gradle-wrapper.properties
